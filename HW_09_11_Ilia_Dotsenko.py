@@ -39,7 +39,7 @@ def add_sample(sample):
     Trie[step]['output'].append(sample)
 
 def next_step(step, key):
-    #return the child node index mathcing the provided key, otherwise return None
+    #return the child node index matching the provided key, otherwise return None
     for node in Trie[step]['child_nodes']:
         if Trie[node]['key'] == key:
             return node
@@ -61,7 +61,7 @@ def find_fail_links():
             while next_step(step, Trie[child]['key']) == None and step != 0:
                   step = Trie[step]['fail_link']
             Trie[child]['fail_link'] = next_step(step, Trie[child]['key'])
-            #set the fail link to the root
+            #if no possible fail links match the child's key, set one to the root
             if Trie[child]['fail_link'] is None:
                   Trie[child]['fail_link'] = 0
             Trie[child]['output'] = Trie[child]['output'] + \
