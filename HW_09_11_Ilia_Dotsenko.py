@@ -1,7 +1,7 @@
 # Zadanie domowe 1 (09.11)
 # Ilia Dotsenko
 
-Trie = []
+Trie = []   # to nie może być zmienna globalna, bo uniemożliwia skonstruowanie dwóch automatów
 def build(samples):
     #initialize the root node
     Trie.append({'key':'',
@@ -80,7 +80,7 @@ def search(words):
         else:
             for x in Trie[step]['output']:
                 words_found.append({'index':i-len(x) + 1,'word':x})
-    return print(words_found)
+    return print(words_found)   # return print?
 
 #insert your samples
 build(['aa', 'abb', 'abc', 'cab'])
