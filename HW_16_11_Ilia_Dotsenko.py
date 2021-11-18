@@ -17,13 +17,13 @@ class Graph(object):
                 self.current_dict[node] = []
                 print(self.current_dict)
         except TypeError:
-            print('Please provide a non-modifiable object.')
+            print('Please provide a non-modifiable object.')    # zamiana wyjątku na komunikat na ekranie nie jest korzystna
 
     def remove_node(self, node):
         #Remove an existing node with all its edges
         if node in self.current_dict:
             self.current_dict.pop(node)
-            for i in self.current_dict:
+            for i in self.current_dict: # czy dałoby się to zrobić bardziej wydajnie?
                 list1 = self.current_dict[i]
                 if node in list1:
                     list1.remove(node)
@@ -36,7 +36,7 @@ class Graph(object):
             self.current_dict[node2].append(node1)
             print(self.current_dict)
         else:
-            print('An edge can be created only between existing nodes.')
+            print('An edge can be created only between existing nodes.')    # raise ValueError
 
     def remove_edge(self, node1, node2):
         #Remove edge between connected node1 and node2
@@ -58,17 +58,17 @@ class Graph(object):
         k = 0
         neighbors = []
         if node in self.current_dict:
-            for i in self.current_dict:
+            for i in self.current_dict: # czy to na pewno jest wydajny sposób zwrócenia wszystkich sąsiadów?
                 list1 = self.current_dict[i]
                 if node in list1:
                     neighbors.append(i)
                     k += 1
-            if k==0:
+            if k==0:    # po co to? lepiej zwrócić pustą listę niż None; a jeśli już, to len(neighbors)
                 return None
             else:
                 return neighbors
 
-    visited_nodes = []
+    visited_nodes = []  # absolutnie zły pomysł - wszystkie grafy mają jedną wspólną listę; zresztą wystarczy spróbować przeiterować dwa razy po jednym grafie
     queued_nodes = []
 
     def bfs(self, node):
@@ -122,6 +122,7 @@ print('Returning depth-first search results for node b ')
 for i in graph1.dfs('b'):
     print(i, end=' ')
 
-print('\nReturning breadth-first search results for node b ')
-for i in graph1.bfs('b'):
-    print(i, end=' ')
+for j in range(4):    
+    print('\nReturning breadth-first search results for node b ')
+    for i in graph1.bfs('b'):
+        print(i, end=' ')
